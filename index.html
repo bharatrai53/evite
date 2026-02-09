@@ -230,15 +230,14 @@
       <h1>Sejal Karki — you’re booked.</h1>
       <p class="sub">
         I’m carving out a clean pocket of the schedule for you.
-        Not rushed, not random. Intentional.
-        Santa Monica. A little old-school. A little trouble.
+        Santa Monica. Old-school.
       </p>
 
       <div class="badgeRow">
         <div class="badge">Organizer: Bharat Rai</div>
         <div class="badge">Attendee: Sejal Karki</div>
-        <div class="badge">Date: <span class="mono">[Pick a day]</span></div>
-        <div class="badge">Start: <span class="mono">[Pick a time]</span></div>
+        <div class="badge">Date: <span class="mono" id="dateBadge">Feb 14</span></div>
+        <div class="badge">Start: <span class="mono" id="timeBadge">3:00 PM PST</span></div>
       </div>
     </header>
 
@@ -285,9 +284,9 @@
           <div class="item">
             <div class="time">+05:00</div>
             <div>
-              <p class="title">Optional extension</p>
-              <p class="desc">Dessert / nightcap / ocean air. If the vibe is right, we keep going.</p>
-              <p class="fine">Approval criteria: you say “one more” and mean it.</p>
+              <p class="title">Last stop</p>
+              <p class="desc">Dessert / nightcap / ocean air. We’re not skipping this part.</p>
+              <p class="fine">We’ll call it when the night says so.</p>
             </div>
           </div>
         </div>
@@ -298,24 +297,23 @@
 
         <div class="details">
           <div class="kv"><span>Neighborhood</span><strong>Santa Monica</strong></div>
-          <div class="kv"><span>Dress code</span><strong>Romantic / vintage (optional)</strong></div>
-          <div class="kv"><span>Intensity</span><strong>Soft start → dangerous finish</strong></div>
+          <div class="kv"><span>Dress code</span><strong>Least</strong></div>
+          <div class="kv"><span>Mood</span><strong>Vintage romantic</strong></div>
           <div class="kv"><span>End time</span><strong>Flexible (respectfully)</strong></div>
         </div>
 
-        <div class="stamp">Pending Her Approval</div>
+        <div class="stamp">Pending RSVP</div>
 
         <div class="divider"></div>
 
         <p class="fine">
           Reply with:
-          <span class="mono">1)</span> two time windows
-          <span class="mono">2)</span> your mood (“soft & romantic” or “bold & playful”)
-          <span class="mono">3)</span> any requests.
+          <span class="mono">1)</span> RSVP yes/no
+          <span class="mono">2)</span> any edits or requests.
         </p>
 
         <p class="fine">
-          I’ll confirm the final version once you approve the hold.
+          I’ll confirm the final version once you RSVP.
         </p>
       </aside>
     </main>
@@ -329,43 +327,39 @@
       <div class="cta">
         <a class="btn" id="approveBtn" href="#">Approve</a>
         <a class="btn secondary" id="editsBtn" href="#">Request edits</a>
-        <a class="btn secondary" id="mapBtn" href="#">Open Santa Monica</a>
       </div>
     </footer>
   </article>
 
   <script>
-    // Edit these:
     const recipientName = "Sejal Karki";
     const organizerName = "Bharat Rai";
 
-    // If you want: set a real day/time here
-    const dateText = "[Pick a day]";
-    const timeText = "[Pick a time]";
+    // Locked details
+    const dateText = "Feb 14";
+    const timeText = "3:00 PM PST";
 
-    // Optional: set your own phone number in international format without + (e.g. 13105551234)
-    // Leave empty to use email instead.
-    const whatsappNumber = ""; // "13105551234"
+    // Optional: WhatsApp number without + (e.g. 13105551234). Leave empty to use email.
+    const whatsappNumber = "";
 
-    // Where the "Open Santa Monica" button should go:
-    const mapUrl = "https://www.google.com/maps/search/?api=1&query=Santa+Monica+CA";
+    // Set badges (in case you ever tweak text in one place)
+    document.getElementById("dateBadge").textContent = dateText;
+    document.getElementById("timeBadge").textContent = timeText;
 
-    // --- wiring ---
     function messageTemplate(type){
       const base =
-`Hold Request — Santa Monica
+`Personal Time Block — Santa Monica
 
 Attendee: ${recipientName}
 Organizer: ${organizerName}
-Proposed: ${dateText} @ ${timeText}
+Scheduled: ${dateText} @ ${timeText}
 
 Reply with:
-1) Approved OR your preferred time window
-2) mood: soft & romantic / bold & playful
-3) any requests`;
+1) RSVP yes/no
+2) any edits or requests`;
 
-      if(type === "approve") return base + "\n\nStatus: Approved ✅";
-      return base + "\n\nStatus: Requesting edits ✍️";
+      if(type === "approve") return base + "\n\nRSVP: Yes ✅";
+      return base + "\n\nRSVP: Requesting edits ✍️";
     }
 
     function openMessage(type){
@@ -373,22 +367,14 @@ Reply with:
         const url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(messageTemplate(type));
         window.open(url, "_blank");
       } else {
-        const subject = encodeURIComponent("Santa Monica Hold — " + recipientName);
+        const subject = encodeURIComponent("Santa Monica RSVP — " + recipientName);
         const body = encodeURIComponent(messageTemplate(type));
         window.location.href = `mailto:?subject=${subject}&body=${body}`;
       }
     }
 
-    // Replace placeholders on the badges (nice touch)
-    const badges = document.querySelectorAll(".badge .mono");
-    if(badges.length >= 2){
-      badges[0].textContent = dateText;
-      badges[1].textContent = timeText;
-    }
-
     document.getElementById("approveBtn").addEventListener("click", (e)=>{ e.preventDefault(); openMessage("approve"); });
     document.getElementById("editsBtn").addEventListener("click", (e)=>{ e.preventDefault(); openMessage("edits"); });
-    document.getElementById("mapBtn").addEventListener("click", (e)=>{ e.preventDefault(); window.open(mapUrl, "_blank"); });
   </script>
 </body>
 </html>
