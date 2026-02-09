@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sejal Karki — Santa Monica Hold</title>
+  <meta name="description" content="A scheduled time block in Santa Monica. Organizer: Bharat Rai. Attendee: Sejal Karki." />
+  <style>
+    :root{
+      --paper:#fbf6ee;
+      --ink:#1f1b16;
+      --muted:#6f6257;
+      --rule:rgba(31,27,22,.18);
+      --accent:#8b6b4f;
+      --shadow: 0 18px 50px rgba(0,0,0,.12);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 15% 20%, rgba(139,107,79,.18), transparent 55%),
+        radial-gradient(900px 650px at 85% 75%, rgba(31,27,22,.10), transparent 55%),
+        #f2e8dc;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+    }
+    .card{
+      width:min(920px, 100%);
+      background:linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.25)), var(--paper);
+      border:1px solid rgba(31,27,22,.14);
+      border-radius:22px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .grain:before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+      mix-blend-mode:multiply;
+      pointer-events:none;
+    }
+    header{
+      padding:40px 34px 26px;
+      border-bottom:1px solid var(--rule);
+    }
+    .kicker{
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:var(--muted);
+    }
+    h1{
+      margin:10px 0 6px;
+      font-size:40px;
+      line-height:1.08;
+      font-weight:750;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.65;
+      max-width:70ch;
+    }
+    .badgeRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+    .badge{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:12px;
+      letter-spacing:.02em;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(31,27,22,.20);
+      background:rgba(255,255,255,.45);
+      color:rgba(31,27,22,.88);
+    }
+
+    main{
+      padding:28px 34px 34px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:22px;
+    }
+    @media (max-width: 860px){ main{grid-template-columns:1fr} }
+
+    .panel{
+      border:1px solid rgba(31,27,22,.14);
+      border-radius:18px;
+      background:rgba(255,255,255,.35);
+      padding:18px 18px 14px;
+    }
+    .panel h2{
+      margin:0 0 10px;
+      font-size:14px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    .timeline{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+    .item{
+      display:grid;
+      grid-template-columns: 110px 1fr;
+      gap:14px;
+      padding-top:10px;
+      border-top:1px dashed rgba(31,27,22,.18);
+    }
+    .item:first-child{border-top:none;padding-top:0}
+    .time{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(31,27,22,.72);
+      padding-top:2px;
+      white-space:nowrap;
+    }
+    .title{margin:0;font-size:18px;font-weight:700}
+    .desc{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.55}
+    .fine{margin:10px 0 0;font-size:12px;color:rgba(111,98,87,.92);line-height:1.55}
+
+    .details{display:flex;flex-direction:column;gap:14px}
+    .kv{
+      display:flex;justify-content:space-between;gap:12px;
+      padding:10px 0;border-bottom:1px solid rgba(31,27,22,.10);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:13px;color:rgba(31,27,22,.88);
+    }
+    .kv span:first-child{color:rgba(111,98,87,.95)}
+    .stamp{
+      margin-top:10px;
+      border:1px solid rgba(139,107,79,.55);
+      color:rgba(139,107,79,1);
+      display:inline-flex;
+      padding:10px 12px;
+      border-radius:12px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      background:rgba(255,255,255,.35);
+      align-self:flex-start;
+    }
+
+    footer{
+      padding:18px 34px 28px;
+      border-top:1px solid var(--rule);
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .smallprint{
+      color:rgba(111,98,87,.95);
+      font-size:12px;
+      line-height:1.55;
+      max-width:66ch;
+    }
+    .cta{
+      display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid rgba(31,27,22,.25);
+      background:rgba(31,27,22,.92);
+      color:var(--paper);
+      padding:10px 12px;
+      border-radius:12px;
+      font-size:13px;
+      letter-spacing:.02em;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .btn.secondary{
+      background:rgba(255,255,255,.45);
+      color:rgba(31,27,22,.92);
+    }
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      color:rgba(31,27,22,.75);
+    }
+    .divider{height:1px;background:rgba(31,27,22,.10);margin:12px 0}
+
+    /* tiny tasteful “vintage poster” flair */
+    .seal{
+      position:absolute;
+      top:18px; right:18px;
+      width:92px; height:92px;
+      border-radius:999px;
+      border:1px solid rgba(31,27,22,.18);
+      background:rgba(255,255,255,.35);
+      display:flex; align-items:center; justify-content:center;
+      transform:rotate(8deg);
+    }
+    .seal span{
+      text-align:center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(31,27,22,.72);
+      line-height:1.25;
+    }
+  </style>
+</head>
+
+<body>
+  <article class="card grain">
+    <div class="seal" aria-hidden="true"><span>SM<br/>Hold</span></div>
+
+    <header>
+      <div class="kicker">Personal Time Block · Santa Monica</div>
+      <h1>Sejal Karki — you’re booked.</h1>
+      <p class="sub">
+        I’m carving out a clean pocket of the schedule for you.
+        Not rushed, not random. Intentional.
+        Santa Monica. A little old-school. A little trouble.
+      </p>
+
+      <div class="badgeRow">
+        <div class="badge">Organizer: Bharat Rai</div>
+        <div class="badge">Attendee: Sejal Karki</div>
+        <div class="badge">Date: <span class="mono">[Pick a day]</span></div>
+        <div class="badge">Start: <span class="mono">[Pick a time]</span></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>Itinerary (draft, not a prison)</h2>
+
+        <div class="timeline">
+          <div class="item">
+            <div class="time">+00:00</div>
+            <div>
+              <p class="title">Arrival + warm start</p>
+              <p class="desc">Coffee or a glass of wine near Montana / Ocean Ave. Easy start, good lighting, no hurry.</p>
+              <p class="fine">Deliverable: relaxed smile. Bonus: you letting me stare a little.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="time">+01:00</div>
+            <div>
+              <p class="title">Golden hour interlude</p>
+              <p class="desc">A slow walk toward the ocean. Santa Monica does the background work; we do the rest.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="time">+02:15</div>
+            <div>
+              <p class="title">Vintage-leaning detour</p>
+              <p class="desc">Bookstore / record shop / quiet little stop that feels like a film scene.</p>
+              <p class="fine">I will pretend I’m not taking notes on what you pick up first.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="time">+03:15</div>
+            <div>
+              <p class="title">Dinner</p>
+              <p class="desc">Reservation handled. You show up. I’ll do the gentleman thing—plus a little.</p>
+              <p class="fine">Contingency plan: if you’re especially charming, we “accidentally” run late.</p>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="time">+05:00</div>
+            <div>
+              <p class="title">Optional extension</p>
+              <p class="desc">Dessert / nightcap / ocean air. If the vibe is right, we keep going.</p>
+              <p class="fine">Approval criteria: you say “one more” and mean it.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <h2>Booking details</h2>
+
+        <div class="details">
+          <div class="kv"><span>Neighborhood</span><strong>Santa Monica</strong></div>
+          <div class="kv"><span>Dress code</span><strong>Romantic / vintage (optional)</strong></div>
+          <div class="kv"><span>Intensity</span><strong>Soft start → dangerous finish</strong></div>
+          <div class="kv"><span>End time</span><strong>Flexible (respectfully)</strong></div>
+        </div>
+
+        <div class="stamp">Pending Her Approval</div>
+
+        <div class="divider"></div>
+
+        <p class="fine">
+          Reply with:
+          <span class="mono">1)</span> two time windows
+          <span class="mono">2)</span> your mood (“soft & romantic” or “bold & playful”)
+          <span class="mono">3)</span> any requests.
+        </p>
+
+        <p class="fine">
+          I’ll confirm the final version once you approve the hold.
+        </p>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="smallprint">
+        <strong>Policy:</strong> this is a hold, not a mandate. You can request edits.
+        I’ll pretend it’s purely operational, but we both know I’m trying to impress you.
+      </div>
+
+      <div class="cta">
+        <a class="btn" id="approveBtn" href="#">Approve</a>
+        <a class="btn secondary" id="editsBtn" href="#">Request edits</a>
+        <a class="btn secondary" id="mapBtn" href="#">Open Santa Monica</a>
+      </div>
+    </footer>
+  </article>
+
+  <script>
+    // Edit these:
+    const recipientName = "Sejal Karki";
+    const organizerName = "Bharat Rai";
+
+    // If you want: set a real day/time here
+    const dateText = "[Pick a day]";
+    const timeText = "[Pick a time]";
+
+    // Optional: set your own phone number in international format without + (e.g. 13105551234)
+    // Leave empty to use email instead.
+    const whatsappNumber = ""; // "13105551234"
+
+    // Where the "Open Santa Monica" button should go:
+    const mapUrl = "https://www.google.com/maps/search/?api=1&query=Santa+Monica+CA";
+
+    // --- wiring ---
+    function messageTemplate(type){
+      const base =
+`Hold Request — Santa Monica
+
+Attendee: ${recipientName}
+Organizer: ${organizerName}
+Proposed: ${dateText} @ ${timeText}
+
+Reply with:
+1) Approved OR your preferred time window
+2) mood: soft & romantic / bold & playful
+3) any requests`;
+
+      if(type === "approve") return base + "\n\nStatus: Approved ✅";
+      return base + "\n\nStatus: Requesting edits ✍️";
+    }
+
+    function openMessage(type){
+      if(whatsappNumber){
+        const url = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(messageTemplate(type));
+        window.open(url, "_blank");
+      } else {
+        const subject = encodeURIComponent("Santa Monica Hold — " + recipientName);
+        const body = encodeURIComponent(messageTemplate(type));
+        window.location.href = `mailto:?subject=${subject}&body=${body}`;
+      }
+    }
+
+    // Replace placeholders on the badges (nice touch)
+    const badges = document.querySelectorAll(".badge .mono");
+    if(badges.length >= 2){
+      badges[0].textContent = dateText;
+      badges[1].textContent = timeText;
+    }
+
+    document.getElementById("approveBtn").addEventListener("click", (e)=>{ e.preventDefault(); openMessage("approve"); });
+    document.getElementById("editsBtn").addEventListener("click", (e)=>{ e.preventDefault(); openMessage("edits"); });
+    document.getElementById("mapBtn").addEventListener("click", (e)=>{ e.preventDefault(); window.open(mapUrl, "_blank"); });
+  </script>
+</body>
+</html>
